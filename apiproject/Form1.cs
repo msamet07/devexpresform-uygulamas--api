@@ -184,33 +184,13 @@ namespace apiproject
             }
         }
 
+        private void ekran_Click(object sender, EventArgs e)
+        {
 
-        //private async Task ekran_ClickAsync(object sender, EventArgs e)
-        //{
-        //    {
-        //        // API adresi
-        //        string apiUrl = "https://edocumentapi.mysoft.com.tr/api/InvoiceInbox/getInvoiceInboxPdfAsZip";
 
-        //        // Parametre
-        //        string invoiceETTN = "03383a0f-f90f-461a-99f5-5e8cf150b320";
+        }
 
-        //        // Query string oluştur
-        //        string queryString = $"?invoiceETTN={invoiceETTN}";
 
-        //        // HTTP isteği oluştur
-        //        var httpClient = new HttpClient();
-
-        //        // Bearer token ekleyin
-        //        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "VN2_MDpsJBY5o-eieEUeeKk1SRTJrleksBrl4U_0_35OK6-hLmtLGD8TAznikn1AfId7fYPAs3TidBO7YgIMFbw06g_zCI1iiJjmlBqnudO3mBynqmDC9_uxxOEVfe1wdMQ8b1na-LrpgDwLxHEDzMAsx7xPnSMP_UyJfD4EGBp5rH5nyH7fI7JQWXBdpKmTldDzkdYHYAEXLOuDzlhuVnhixb8Obw9GSrDzEo1mKC1E1aUJULj9BhM4VBWlxvjaVFxE-tJwOAaTNGTPS6bOEBsIQFEbuhhbXcESkoa0gzhctxtiGDjW8bGJvTDhptBcEoTppmFcVSY8Dq1TWIXmd5eCX2dJT_Pl6_EMIP6Hct-xqYcHxtX2Ok-tY3bC0UYPVhm0KDeD3AWZFhTnRdtwGyr-t_m_PkuzzbH70C6G_sbTyQKabBQu7fmWPIO3bXMCax408_AFVRfZq4AxkYN8w07zEFSvZGdyPPjl-WGAlrZB3HlTpaCl9jMqhDVN9EuIRFnUbRDbUkGuQNdUMOJ2uxqgdvhvOMawHdNjKRSs-8OaUJgzsLzW0b9g494h0YLlarm2pzwWhs_Cm1OHiQVEjXQFqcrgTECsLvC9MaYRZDQB7nKb4N2DKo7w5ML87v8j8pCniW6fpNha9mYP4wFjx9MYQIWEGPQ1cOBSRejU2dWYbwag1Wra3Tn0zNH4pAPw9wKdops_oLyXc8V8unOILi_o3FcdmGSk408e5w2njHgMkB60ozgLn1pE4AEb-Fr4mBVgKokrDsxy658R8OitK-CR2mlmxICKtS4cLAtpiRI");
-
-        //        // GET isteği gönder
-        //        var response = await httpClient.GetAsync(apiUrl + queryString);
-
-        //        // Yanıtın içeriğini al
-        //        var content = await response.Content.ReadAsStringAsync();
-
-        //        
-        //    }
-        //}
+        
     }
 }

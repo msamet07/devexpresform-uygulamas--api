@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.IO;
 
 namespace apiproject
 {
@@ -192,6 +192,53 @@ namespace apiproject
                 return invoices;
             }
         }
+        //public static  class PdfResponse
+        //{
+
+        //    // API adresi
+        //    string apiUrl = "https://edocumentapi.mysoft.com.tr/api/InvoiceInbox/getInvoiceInboxPdfAsZip";
+
+        //    // Parametre
+        //    string invoiceETTN = "03383a0f-f90f-461a-99f5-5e8cf150b320";
+
+        //    // Query string oluştur
+        //    string queryString = $"?invoiceETTN={invoiceETTN}";
+
+        //    // HTTP isteği oluştur
+        //    var httpClient = new HttpClient();
+
+        //    // Bearer token ekleyin
+        //    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "igkKpsNe5GpJ5e13FtOw0Dgp6_XwFwLz_6zpyj4TG9tcNYNp2kVaMCV0reAoOnnBdUflmkDMcPpjUMsSRFTLL_uO5jbF5Xlb1EOAJJo69Jo4d7Z_Cbm_P2PJ75-2aXG2CD2dxPlU5eJtm_7AXHiFZJMA6c5VcDV3zFF83DS7Mk30QJ8JQRM6mTZ6v9b8Xe3sr7gYBVyVE5_TDGjYwRqjUxr6K-BmoBWwJnZORZf9M87HjWNV7wqo1h1G3WUQgX-Y9XRc-qFexFhL9lXJywy9MP5c-z75qXTD1d33rcstbDl3YXVlZMADxVmCi0rO1wQRDkqdLUFMh4CPW-cs0VBAraWvfsRVtnhllhrTBHVS7FPafnhTPpDoLZeDTBR4HFMt4I6UOyaaPLYkHlMlZMrWkMXvJnb50xse8ltr4991zi_jELh8_7TvhJJis7iPbphPavt3HQoEggSE8LE9riQKfJHuo8bEORtlAGbWHyntmq2kBPENVy_Nk7Rc7-l79L1dX7CMQOSVDEJwTk0oxwd6AU9jOLlk_rfuI6q457QUpwSO2clxdFOSLMsGPPpZlubLMVGwOAax2EH9IV8PAcBTn0J7Q3P1vPilBTGzoS7JyRRukkBt68oajbQcAXEKGLTJnnO54sak70uCxTZCzmiYoj9WcnpEwTJiyOVotbWl7gdmBFzfLLdGHixxVgfiNKbdXosVmCTC7e-R59dUSEQ0ZEDzuMlKVxx2AK-_jAevGGEbGhClMtUNswF5lw2BJNsQkBi1BVDRHVUgTTg8R3Ja1OAN0hNOY_sTrWq9Fzs3sm4");
+
+        //    // var content = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
+        //    var response = await httpClient.GetAsync(apiUrl + queryString);
+
+
+        //    // Yanıtın içeriğini al
+        //    PdfResponse pdfResponse = JsonConvert.DeserializeObject<PdfResponse>(await response.Content.ReadAsStringAsync());
+
+
+
+        //    // Base64 stringini byte dizisine dönüştür
+        //    byte[] pdfBytes = Convert.FromBase64String(pdfResponse.data);
+
+        //    //byte[] pdfBytes = Convert.FromBase64String(pdfResponse.data);
+        //    //File.WriteAllBytes("output.pdf", pdfBytes);
+
+
+        //    // Dosyayı oluştur ve yaz
+        //    //using (FileStream stream = new FileStream(@"C:\Users\PC\Documents\pdfs\file.zip", FileMode.Create))
+        //    //{
+        //    //    using (BinaryWriter writer = new BinaryWriter(stream))
+        //    //    {
+        //    //        writer.Write(pdfBytes, 0, pdfBytes.Length);
+        //    //    }
+        //    //}
+
+        //    //// Kullanıcıya bildir
+        //    //Console.WriteLine("Veri başarıyla PDF dosyasına kaydedildi.");
+        //    //Console.ReadLine();
+        //}
 
 
     }
