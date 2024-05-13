@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.IO;
+using System.Data.SqlClient;
+using System.Data;
+
 
 namespace apiproject
 {
     static class Program
     {
+
+
+
         /// <summary>
         /// Uygulamanın ana girdi noktası.
         /// </summary>
         [STAThread]
-        static void Main()
+        static async Task Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-        }
-        static async Task Main(string[] args)
-        {
+
             // Token almak için kullanıcı bilgileri
             var tokenUsername = "efatura@etfbilisim.com";
             var tokenPassword = "RejrCwB3";
@@ -79,6 +81,7 @@ namespace apiproject
                         // istek atacağım API adresini belirt
                         client.BaseAddress = new Uri("https://edocumentapi.mysoft.com.tr/api/InvoiceInbox/getInvoiceInboxWithHeaderInfoListForPeriod");
 
+
                         // Bearer token'ı ekle
                         client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue
                             ("Bearer", accessToken);
@@ -92,10 +95,10 @@ namespace apiproject
                         // Sunucudan gelen yanıtı al
                         string responseJson = await response.Content.ReadAsStringAsync();
 
+
                         // JSON verisini XML'e dönüştür
                         JObject jsonObject = JObject.Parse(responseJson);
                         XDocument xmlData = JsonConvert.DeserializeXNode(responseJson, "Root");
-
 
                         // Konsolda XML verisini göster
                         // Console.WriteLine(xmlData.ToString());
@@ -103,33 +106,41 @@ namespace apiproject
                         // XML verisini faturalar listesine dönüştür
                         List<Invoice> invoices = InvoiceHelper.ParseInvoices(xmlData);
 
-                        // Faturaları işle veya görüntüle
-                        foreach (var invoice in invoices)
+                        DataSet ds = new DataSet();
+                        using (var reader = xmlData.CreateReader())
                         {
-                            Console.WriteLine($"Fatura No: {invoice.DocNo}");
-                            Console.WriteLine($"Profil: {invoice.Profile}");
-                            Console.WriteLine($"Fatura Durumu: {invoice.InvoiceStatusText}");
-                            Console.WriteLine($"Fatura Tipi: {invoice.InvoiceType}");
-                            Console.WriteLine($"ETTN: {invoice.Ettn}");
-                            Console.WriteLine($"Fatura Tarihi: {invoice.DocDate}");
-                            Console.WriteLine($"PK Alias: {invoice.PkAlias}");
-                            Console.WriteLine($"GB Alias: {invoice.GbAlias}");
-                            Console.WriteLine($"VKN/TCKN: {invoice.VknTckn}");
-                            Console.WriteLine($"Hesap Adı: {invoice.AccountName}");
-                            Console.WriteLine($"Satır Uzunluğu Tutarı: {invoice.LineExtensionAmount}");
-                            Console.WriteLine($"Vergi Hariç Tutar: {invoice.TaxExclusiveAmount}");
-                            Console.WriteLine($"Vergi Dahil Tutar: {invoice.TaxInclusiveAmount}");
-                            Console.WriteLine($"Ödenecek Yuvarlama Tutarı: {invoice.PayableRoundingAmount}");
-                            Console.WriteLine($"Ödenecek Tutar: {invoice.PayableAmount}");
-                            Console.WriteLine($"Toplam İndirim Tutarı: {invoice.AllowanceTotalAmount}");
-                            Console.WriteLine($"Toplam Vergi: {invoice.TaxTotalTra}");
-                            Console.WriteLine($"Para Birimi Kodu: {invoice.CurrencyCode}");
-                            Console.WriteLine($"Para Birimi Kuru: {invoice.CurrencyRate}");
-                            Console.WriteLine($"Oluşturulma Tarihi: {invoice.CreateDate}");
-                            Console.WriteLine($"Referans Anahtarı: {invoice.ReferenceKey}");
-                            Console.WriteLine();
+                            ds.ReadXml(reader);
                         }
-                        
+
+
+
+                        //////////                      
+                        // Faturaları işle veya görüntüle
+                        //foreach (var invoice in invoices)
+                        //{
+                        //    Console.WriteLine($"Fatura No: {invoice.DocNo}");
+                        //    Console.WriteLine($"Profil: {invoice.Profile}");
+                        //    Console.WriteLine($"Fatura Durumu: {invoice.InvoiceStatusText}");
+                        //    Console.WriteLine($"Fatura Tipi: {invoice.InvoiceType}");
+                        //    Console.WriteLine($"ETTN: {invoice.Ettn}");
+                        //    Console.WriteLine($"Fatura Tarihi: {invoice.DocDate}");
+                        //    Console.WriteLine($"PK Alias: {invoice.PkAlias}");
+                        //    Console.WriteLine($"GB Alias: {invoice.GbAlias}");
+                        //    Console.WriteLine($"VKN/TCKN: {invoice.VknTckn}");
+                        //    Console.WriteLine($"Hesap Adı: {invoice.AccountName}");
+                        //    Console.WriteLine($"Satır Uzunluğu Tutarı: {invoice.LineExtensionAmount}");
+                        //    Console.WriteLine($"Vergi Hariç Tutar: {invoice.TaxExclusiveAmount}");
+                        //    Console.WriteLine($"Vergi Dahil Tutar: {invoice.TaxInclusiveAmount}");
+                        //    Console.WriteLine($"Ödenecek Yuvarlama Tutarı: {invoice.PayableRoundingAmount}");
+                        //    Console.WriteLine($"Ödenecek Tutar: {invoice.PayableAmount}");
+                        //    Console.WriteLine($"Toplam İndirim Tutarı: {invoice.AllowanceTotalAmount}");
+                        //    Console.WriteLine($"Toplam Vergi: {invoice.TaxTotalTra}");
+                        //    Console.WriteLine($"Para Birimi Kodu: {invoice.CurrencyCode}");
+                        //    Console.WriteLine($"Para Birimi Kuru: {invoice.CurrencyRate}");
+                        //    Console.WriteLine($"Oluşturulma Tarihi: {invoice.CreateDate}");
+                        //    Console.WriteLine($"Referans Anahtarı: {invoice.ReferenceKey}");
+                        //    Console.WriteLine();
+                        //}
                     }
                 }
                 else
@@ -138,11 +149,13 @@ namespace apiproject
                 }
             }
         }
-    
-    public static class InvoiceHelper
+
+        public static class InvoiceHelper
         {
+
             public static List<Invoice> ParseInvoices(XDocument xmlData)
             {
+
                 List<Invoice> invoices = new List<Invoice>();
 
                 foreach (var dataElement in xmlData.Root.Elements("data"))
@@ -179,5 +192,7 @@ namespace apiproject
                 return invoices;
             }
         }
+
+
     }
 }
