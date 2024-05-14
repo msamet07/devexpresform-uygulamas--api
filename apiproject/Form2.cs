@@ -51,9 +51,8 @@ namespace apiproject
             // Base64 stringini byte dizisine dönüştür
             byte[] zipBytes = Convert.FromBase64String(pdfResponse.data);
 
-            // Byte dizisini MemoryStream'e aktar
-            // Byte dizisini MemoryStream'e aktar
-            // Byte dizisini MemoryStream'e aktar
+            
+           
             // Byte dizisini MemoryStream'e aktar
             using (MemoryStream zipStream = new MemoryStream(zipBytes))
             {
