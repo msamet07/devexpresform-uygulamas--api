@@ -29,8 +29,8 @@ namespace apiproject
             try
             {
                 // Token almak için kullanıcı bilgileri
-                var tokenUsername = "efatura@etfbilisim.com";
-                var tokenPassword = "RejrCwB3";
+                var tokenUsername = "";
+                var tokenPassword = "";
                 var grantType = "password";
 
                 // Token almak için istek verisi
@@ -39,7 +39,7 @@ namespace apiproject
             new KeyValuePair<string, string>("username", tokenUsername),
             new KeyValuePair<string, string>("password", tokenPassword),
             new KeyValuePair<string, string>("grant_type", grantType),
-          //  new KeyValuePair<string, string>("invoiceETTN", "03383a0f-f90f-461a-99f5-5e8cf150b320")
+          //  new KeyValuePair<string, string>("invoiceETTN", "03383a0f-")
 
         });
 
